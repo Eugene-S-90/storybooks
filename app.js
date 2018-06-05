@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
@@ -14,6 +15,7 @@ require('./config/passport')(passport);
 // LOAD ROUTES
 const index = require('./routes/index');
 const auth = require('./routes/auth');
+const stories = require('./routes/stories');
 
 
 
@@ -55,13 +57,17 @@ app.use((req, res, next) => {
     next();
 })
 
+
 const port = process.env.PORT || 5000;
 
+// SET STATIC FOLDER
 
+app.use(express.static(path.join(__dirname, 'public')));
 
 // USE ROUTES
 app.use('/', index)
 app.use('/auth', auth)
+app.use('/stories', stories)
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
