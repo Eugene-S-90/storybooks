@@ -1,3 +1,6 @@
 <h1>Welcome</h1>
 <p>bla bla bla bla </p>
-<a class="btn red darketn-1" href="/auth/google"><i class="fa ga-google left"></i>Login with Google</a>
+{{#if user}}
+{{else}}
+<a class="btn red darketn-1" href="/auth/google"><i class="fab fa-google left"></i>Login with Google</a>
+{{/if}}
