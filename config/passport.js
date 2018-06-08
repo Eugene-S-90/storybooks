@@ -37,12 +37,9 @@ module.exports = function (passport) {
                         .then(user => done(null, user))
                 }
             })
-
-
         }
         )
     );
-
     passport.serializeUser((user, done) => {
         done(null, user.id)
     });
@@ -50,3 +47,4 @@ module.exports = function (passport) {
         User.findById(id).then(user => done(null, user));
     });
 }
+

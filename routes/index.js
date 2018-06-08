@@ -11,4 +11,4 @@ router.get('/dashboard',ensureAuthenticated, (req, res) => {
 router.get('/about', (req, res) => {
     res.render('index/about');
 });
-module.exports = router
+module.exports = router;

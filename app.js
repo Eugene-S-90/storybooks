@@ -65,9 +65,9 @@ const port = process.env.PORT || 5000;
 app.use(express.static(path.join(__dirname, 'public')));
 
 // USE ROUTES
-app.use('/', index)
-app.use('/auth', auth)
-app.use('/stories', stories)
+app.use('/', index);
+app.use('/auth', auth);
+app.use('/stories', stories);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
