@@ -34,10 +34,12 @@
             var elems = document.querySelectorAll('.sidenav');
             var instances = M.Sidenav.init(elems);
         });
-
-        CKEDITOR.replace('body', {
-            plugins: 'wysiwygarea,toolbar,basicstyles,link'
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems);
         });
+
+        CKEDITOR.replace('body');
     </script>
 </body>
 
