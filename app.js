@@ -17,8 +17,6 @@ const index = require('./routes/index');
 const auth = require('./routes/auth');
 const stories = require('./routes/stories');
 
-
-
 // LOAD KEYS
 const keys = require('./config/keys');
 
@@ -56,7 +54,6 @@ app.use((req, res, next) => {
     res.locals.user = req.user || null;
     next();
 })
-
 
 const port = process.env.PORT || 5000;
 
