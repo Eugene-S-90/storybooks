@@ -11,6 +11,7 @@ const { ensureAuthenticated, ensureGuest } = require('../helpers/auth');
 router.get('/', (req, res) => {
   Story.find({ status: 'public' })
     .populate('user')
+    .sort({date:'desc'})
     .then(stories => {
       res.render('stories/index', {
         stories: stories
@@ -24,6 +25,7 @@ router.get('/show/:id', (req, res) => {
     _id: req.params.id
   })
     .populate('user')
+    .populate('comments.commentUser')
     .then(story => {
       res.render('stories/show', {
         story: story
@@ -43,17 +45,22 @@ router.get('/edit/:id', ensureAuthenticated, (req, res) => {
     _id: req.params.id
   })
     .then(story => {
-      res.render('stories/edit', {
-        story: story
-      });
-      console.log("story EDIT page", story)
+      if(story.user!=req.user.id){
+        res.redirect('/stories')
+      }else{
+        res.render('stories/edit', {
+          story: story
+        });
+      }
     });
 });
 
 
 // Process Add story
 router.post('/', (req, res) => {
+  console.log('req.body=====>', req.body)
   let allowComments;
+  console.log("req.body.allowComments>>>>>>>>>>>>>>>>>>>>>", req.body.allowComments)
   if (req.body.allowComments) {
     allowComments = true;
   } else {
@@ -66,6 +73,7 @@ router.post('/', (req, res) => {
     allowComments: allowComments,
     user: req.user.id
   }
+  console.log("allowComments========>>>>", allowComments)
 
   // Create a Story
   new Story(newsStory)
@@ -106,7 +114,6 @@ router.put('/:id', (req, res) => {
 
 // delete story
 router.delete('/:id', (req, res) => {
-  console.log(req.params.id)
   Story.remove({
     _id: req.params.id
   })
@@ -114,5 +121,27 @@ router.delete('/:id', (req, res) => {
       res.redirect('/dashboard');
     })
 })
+
+// Add Comment
+
+router.post('/comment/:id', (req, res) => {
+  Story.findOne({
+    _id: req.params.id
+  })
+    .then(story => {
+      const newComment = {
+        commentBody: req.body.commentBody,
+        commentUser: req.user.id
+      }
+
+      // add to commetns array (in the beginning)
+      story.comments.unshift(newComment);
+      story.save()
+        .then(story => {
+          res.redirect(`/stories/show/${story.id}`)
+        });
+    })
+})
+
 
 module.exports = router;
