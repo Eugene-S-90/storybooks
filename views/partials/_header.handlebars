@@ -37,7 +37,7 @@
         <li class="divider"></li>
         {{#if user}}
         <li><a href="/dashboard"><i class="fa fa-cog"></i>Dashboard</a></li>
-        <li><a href="/stories/my"><i class="fa fa-user"></i>My stories</a></li>
+        <li><a href="/stories/user/{{user.id}}"><i class="fa fa-user"></i>My stories</a></li>
         <li><a href="/auth/logout"><i class="fab fa-accessible-icon"></i>Logout</a></li>
         {{/if}}
     </ul>

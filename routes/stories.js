@@ -11,7 +11,7 @@ const { ensureAuthenticated, ensureGuest } = require('../helpers/auth');
 router.get('/', (req, res) => {
   Story.find({ status: 'public' })
     .populate('user')
-    .sort({date:'desc'})
+    .sort({ date: 'desc' })
     .then(stories => {
       res.render('stories/index', {
         stories: stories
@@ -36,6 +36,20 @@ router.get('/show/:id', (req, res) => {
 
 });
 
+// LIST STORIES FROM a USER
+router.get('/user/:userId', (req, res) => {
+  console.log(req.params)
+  Story.find({ user: req.params.userId, status: 'public' })
+    .populate('user')
+    .then(stories => {
+      res.render('stories/index', {
+        stories: stories
+      })
+    })
+
+})
+
+
 // Add story form
 router.get('/add', ensureAuthenticated, (req, res) => {
   res.render('stories/add');
@@ -45,9 +59,9 @@ router.get('/edit/:id', ensureAuthenticated, (req, res) => {
     _id: req.params.id
   })
     .then(story => {
-      if(story.user!=req.user.id){
+      if (story.user != req.user.id) {
         res.redirect('/stories')
-      }else{
+      } else {
         res.render('stories/edit', {
           story: story
         });
