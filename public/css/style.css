@@ -2,6 +2,8 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    font-family: 'Oswald', sans-serif;
+    font-size:18px;
   }
 
   main {
@@ -10,6 +12,10 @@ body {
   .story-text {
     min-height: 120px;
 }
+h1 {
+  color: #4373e0;
+  font-size: 3rem;
+}
 .dash-status{
   text-transform:capitalize;
 }
@@ -17,3 +23,29 @@ body {
 #delete-form{
   display: inline;
 }
+.fa.fa-book {
+  padding-right: 5px;
+}
+.footer__description{
+  color: #4373e0;
+}
+
+.nav__logo-img {
+  width: 190px;
+  margin-top: 9px;
+}
+
+canvas{
+  margin-top:20px;
+}
+
+.funny-hands:hover{
+  cursor: none;
+}
+.funny-hands {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
