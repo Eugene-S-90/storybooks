@@ -5,7 +5,7 @@
 </form>
 <ul id="messages"></ul>
 <script>
-    var socket = io.connect(window.location.hostname);
+    var socket = io.connect(window.location.hostname+":3000");
     const form = document.getElementById('chat');
     const messages = document.getElementById('messages');
     form.addEventListener('submit', e => {

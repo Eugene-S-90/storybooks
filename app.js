@@ -102,7 +102,7 @@ app.listen(port, () => {
 });
 
 const Server = require('socket.io');
-const server = new Server(80);
+const server = new Server(3000);
 
 server.on('connection', (socket) => {
     console.log('Client connected',socket.id);
