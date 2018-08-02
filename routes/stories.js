@@ -65,6 +65,7 @@ router.get('/user/:userId', (req, res) => {
 })
 
 
+
 // Add story form
 router.get('/add', ensureAuthenticated, (req, res) => {
   res.render('stories/add');

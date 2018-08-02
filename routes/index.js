@@ -4,6 +4,7 @@ const { ensureAuthenticated, ensureGuest } = require('../helpers/auth');
 const mongoose = require('mongoose')
 const Story = mongoose.model('stories');
 
+
 router.get('/', ensureGuest, (req, res) => {
     res.render('index/welcome');
 });
@@ -20,5 +21,11 @@ router.get('/dashboard', ensureAuthenticated, (req, res) => {
 });
 router.get('/about', (req, res) => {
     res.render('index/about');
+});
+
+router.get('/chat', (req, res) => {
+    res.render('index/chat');
+
+
 });
 module.exports = router;

@@ -101,12 +101,14 @@ app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
 });
 
-
 const Server = require('socket.io');
 const server = new Server(3000);
 
-
 server.on('connection', (socket) => {
-    console.log('Client connected',soket.id);
-    socket.on('disconnect', () => console.log('Client disconnected',soket.id));
+    console.log('Client connected',socket.id);
+    socket.on('disconnect', () => console.log('Client disconnected',socket.id));
+    socket.on('chat', msg => {
+        server.emit('chat', msg);
+        console.log('from server msg',msg);
+    });
   });
